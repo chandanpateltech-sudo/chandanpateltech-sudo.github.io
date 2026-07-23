@@ -1,6 +1,6 @@
 # Chandan Patel
 
-## System Administrator | Aspiring AWS Cloud Administrator
+## System & Network Administrator | Aspiring AWS Cloud Administrator
 
 Welcome to my portfolio website.
 
