@@ -5,6 +5,6 @@
 Welcome to my portfolio website.
 
 Currently learning:
-
-- AWS SysOps Admin
+- AWS Certified SysOps Administrator - Associate
+  
 Coming Soon...
