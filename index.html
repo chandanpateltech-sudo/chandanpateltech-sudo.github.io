@@ -1,105 +1,479 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chandan Patel | Cloud Portfolio</title>
-    
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chandan Patel — System &amp; Network Security Administrator</title>
+<meta name="description" content="Chandan U. Patel — System & Network Security Administrator, 5+ years, transitioning into AWS Cloud Administration.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0a0e14;
+    --bg-1: #0d1219;
+    --panel: #10161f;
+    --panel-2: #131b26;
+    --border: #1c2530;
+    --border-soft: #171f29;
+    --text: #e6edf3;
+    --text-dim: #8b96a5;
+    --text-faint: #566172;
+    --cyan: #2dd4bf;
+    --cyan-dim: rgba(45,212,191,0.12);
+    --amber: #f5a623;
+    --amber-dim: rgba(245,166,35,0.12);
+    --green: #4ade80;
+    --red: #f87171;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --sans: 'Inter', system-ui, sans-serif;
+  }
 
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:
+      radial-gradient(circle at 15% 0%, rgba(45,212,191,0.05), transparent 40%),
+      radial-gradient(circle at 85% 15%, rgba(245,166,35,0.04), transparent 35%),
+      var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.6;
+    min-height:100vh;
+    overflow-x:hidden;
+  }
+
+  /* faint blueprint / network grid backdrop */
+  .grid-backdrop{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background-image:
+      linear-gradient(rgba(45,212,191,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(45,212,191,0.035) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 10%, black 20%, transparent 75%);
+  }
+
+  .wrap{ position:relative; z-index:1; max-width:980px; margin:0 auto; padding:0 24px; }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(10,14,20,0.82);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border-soft);
+  }
+  .nav-inner{
+    max-width:980px; margin:0 auto; padding:14px 24px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .logo{
+    font-family:var(--mono); font-weight:700; font-size:14px; letter-spacing:0.02em;
+    color:var(--text); display:flex; align-items:center; gap:8px;
+  }
+  .logo .dot{ width:8px; height:8px; border-radius:50%; background:var(--green); box-shadow:0 0 8px var(--green); }
+  .nav-links{ display:flex; gap:28px; list-style:none; }
+  .nav-links a{
+    color:var(--text-dim); text-decoration:none; font-size:13px; font-family:var(--mono);
+    letter-spacing:0.03em; transition:color .2s ease;
+  }
+  .nav-links a:hover, .nav-links a:focus-visible{ color:var(--cyan); }
+  .nav-links a:focus-visible{ outline:1px solid var(--cyan); outline-offset:4px; }
+  @media (max-width:640px){ .nav-links{ display:none; } }
+
+  /* ---------- HERO ---------- */
+  .hero{ padding:72px 0 56px; }
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; color:var(--cyan); letter-spacing:0.14em;
+    text-transform:uppercase; display:flex; align-items:center; gap:10px; margin-bottom:18px;
+  }
+  .eyebrow::before{ content:''; width:22px; height:1px; background:var(--cyan); }
+
+  h1.name{
+    font-family:var(--mono); font-weight:800; font-size:clamp(32px, 5.4vw, 52px);
+    letter-spacing:-0.01em; line-height:1.08; color:var(--text);
+  }
+  .role{
+    font-family:var(--mono); font-size:clamp(15px, 2vw, 18px); color:var(--text-dim);
+    margin-top:10px;
+  }
+  .role .arrow{ color:var(--amber); }
+
+  .terminal{
+    margin-top:36px;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 20px 50px -20px rgba(0,0,0,0.6);
+  }
+  .term-bar{
+    display:flex; align-items:center; gap:8px;
+    padding:10px 14px; background:var(--panel-2); border-bottom:1px solid var(--border);
+  }
+  .term-bar span{ width:10px; height:10px; border-radius:50%; display:inline-block; }
+  .term-bar span:nth-child(1){ background:#f87171; }
+  .term-bar span:nth-child(2){ background:#f5a623; }
+  .term-bar span:nth-child(3){ background:#4ade80; }
+  .term-title{ margin-left:8px; font-family:var(--mono); font-size:12px; color:var(--text-faint); }
+  .term-body{
+    padding:20px 22px; font-family:var(--mono); font-size:13.5px; color:var(--text-dim);
+    min-height:150px;
+  }
+  .term-body .line{ margin-bottom:6px; white-space:pre-wrap; }
+  .prompt{ color:var(--cyan); }
+  .out{ color:var(--text); }
+  .caret{
+    display:inline-block; width:8px; height:16px; background:var(--cyan);
+    vertical-align:middle; margin-left:2px; animation:blink 1s step-end infinite;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  .stat-row{ display:flex; gap:14px; flex-wrap:wrap; margin-top:28px; }
+  .stat{
+    font-family:var(--mono); border:1px solid var(--border); background:var(--panel);
+    border-radius:8px; padding:12px 16px; flex:1; min-width:130px;
+  }
+  .stat .n{ font-size:22px; font-weight:700; color:var(--cyan); }
+  .stat .l{ font-size:11px; color:var(--text-faint); text-transform:uppercase; letter-spacing:0.08em; margin-top:2px; }
+
+  /* ---------- SECTION HEADERS ---------- */
+  section{ padding:56px 0; border-top:1px solid var(--border-soft); }
+  .sec-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:28px; }
+  .sec-tag{ font-family:var(--mono); font-size:12px; color:var(--text-faint); }
+  .sec-title{ font-family:var(--mono); font-size:22px; font-weight:700; color:var(--text); }
+
+  /* ---------- ABOUT ---------- */
+  .about-text{ color:var(--text-dim); font-size:15.5px; max-width:68ch; }
+  .about-text strong{ color:var(--text); font-weight:600; }
+
+  /* ---------- SKILLS: monitoring-panel cards ---------- */
+  .status-grid{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr)); gap:14px;
+  }
+  .status-card{
+    background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:16px 18px;
+    transition:border-color .2s ease, transform .2s ease;
+  }
+  .status-card:hover{ border-color:rgba(45,212,191,0.4); transform:translateY(-2px); }
+  .status-head{ display:flex; align-items:center; gap:8px; margin-bottom:10px; }
+  .status-dot{ width:7px; height:7px; border-radius:50%; background:var(--green); box-shadow:0 0 6px var(--green); flex-shrink:0; }
+  .status-name{ font-family:var(--mono); font-size:13px; font-weight:700; color:var(--text); }
+  .status-tags{ display:flex; flex-wrap:wrap; gap:6px; }
+  .tag{
+    font-family:var(--mono); font-size:11px; color:var(--text-dim);
+    background:var(--panel-2); border:1px solid var(--border-soft);
+    padding:3px 8px; border-radius:5px;
+  }
+
+  /* ---------- CERTS ---------- */
+  .cert-row{ display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:12px; }
+  .cert{
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    border:1px solid var(--border); background:var(--panel); border-radius:8px; padding:14px 16px;
+  }
+  .cert .cn{ font-family:var(--mono); font-size:13px; color:var(--text); }
+  .cert .cs{ font-family:var(--mono); font-size:10px; padding:3px 8px; border-radius:20px; text-transform:uppercase; letter-spacing:0.04em; }
+  .cs.done{ color:var(--green); background:rgba(74,222,128,0.1); border:1px solid rgba(74,222,128,0.3); }
+  .cs.progress{ color:var(--amber); background:var(--amber-dim); border:1px solid rgba(245,166,35,0.3); }
+
+  /* ---------- EXPERIENCE: log timeline ---------- */
+  .log{ position:relative; padding-left:26px; }
+  .log::before{ content:''; position:absolute; left:6px; top:6px; bottom:6px; width:1px; background:var(--border); }
+  .log-entry{ position:relative; margin-bottom:34px; }
+  .log-entry:last-child{ margin-bottom:0; }
+  .log-entry::before{
+    content:''; position:absolute; left:-26px; top:5px; width:11px; height:11px;
+    border-radius:50%; background:var(--bg); border:2px solid var(--cyan);
+  }
+  .log-meta{ font-family:var(--mono); font-size:11.5px; color:var(--text-faint); margin-bottom:4px; letter-spacing:0.02em; }
+  .log-role{ font-family:var(--mono); font-size:16px; font-weight:700; color:var(--text); }
+  .log-org{ font-size:13.5px; color:var(--cyan); margin-bottom:10px; }
+  .log-list{ list-style:none; color:var(--text-dim); font-size:14px; }
+  .log-list li{ position:relative; padding-left:16px; margin-bottom:6px; }
+  .log-list li::before{ content:'›'; position:absolute; left:0; color:var(--text-faint); }
+
+  /* ---------- EDUCATION ---------- */
+  .edu-row{ display:flex; flex-direction:column; gap:12px; }
+  .edu{ display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; border-bottom:1px dashed var(--border); padding-bottom:12px; }
+  .edu:last-child{ border-bottom:none; }
+  .edu .en{ font-size:14.5px; color:var(--text); font-weight:600; }
+  .edu .es{ font-size:13px; color:var(--text-dim); }
+  .edu .ey{ font-family:var(--mono); font-size:12px; color:var(--text-faint); }
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:14px; }
+  .contact-card{
+    border:1px solid var(--border); background:var(--panel); border-radius:10px;
+    padding:18px; text-decoration:none; color:var(--text); transition:border-color .2s ease, transform .2s ease;
+    display:flex; flex-direction:column; gap:6px;
+  }
+  .contact-card:hover{ border-color:var(--cyan); transform:translateY(-3px); }
+  .contact-card .cc-label{ font-family:var(--mono); font-size:10.5px; color:var(--text-faint); text-transform:uppercase; letter-spacing:0.08em; }
+  .contact-card .cc-value{ font-family:var(--mono); font-size:14px; color:var(--cyan); word-break:break-word; }
+
+  footer{ padding:32px 0 48px; text-align:center; }
+  footer p{ font-family:var(--mono); font-size:12px; color:var(--text-faint); }
+
+  @media (prefers-reduced-motion: reduce){
+    .caret{ animation:none; }
+    html{ scroll-behavior:auto; }
+  }
+
+  ::selection{ background:var(--cyan); color:#0a0e14; }
+</style>
 </head>
-
 <body>
 
-    <h1>Chandan U. Patel</h1>
+<div class="grid-backdrop"></div>
 
-    <h2>System & Network Administrator</h2>
+<nav>
+  <div class="nav-inner">
+    <div class="logo"><span class="dot"></span>chandan@infra:~$</div>
+    <ul class="nav-links">
+      <li><a href="#about">about</a></li>
+      <li><a href="#skills">skills</a></li>
+      <li><a href="#experience">experience</a></li>
+      <li><a href="#certs">certs</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </div>
+</nav>
 
-    <h3>Aspiring AWS Cloud Administrator</h3>
+<div class="wrap">
 
-    <hr>
+  <!-- HERO -->
+  <section class="hero" style="border-top:none; padding-bottom:0;">
+    <div class="eyebrow">infrastructure &amp; security</div>
+    <h1 class="name">Chandan U. Patel</h1>
+    <div class="role">System &amp; Network Security Administrator <span class="arrow">→</span> Aspiring AWS Cloud Administrator</div>
 
-    <h2>About Me</h2>
+    <div class="terminal" role="img" aria-label="Terminal window showing a whoami command with Chandan's role summary">
+      <div class="term-bar">
+        <span></span><span></span><span></span>
+        <span class="term-title">bash — chandan@weetech</span>
+      </div>
+      <div class="term-body" id="term-body">
+        <div class="line"><span class="prompt">chandan@infra:~$</span> <span class="out" id="typed"></span><span class="caret"></span></div>
+      </div>
+    </div>
 
-    <p>
-        I am a System & Network Administrator with 5+ years of experience
-        managing Windows, Linux and macOS environments.
+    <div class="stat-row">
+      <div class="stat"><div class="n">5+</div><div class="l">Years Experience</div></div>
+      <div class="stat"><div class="n">100+</div><div class="l">Endpoints Managed</div></div>
+      <div class="stat"><div class="n">3</div><div class="l">OS Platforms</div></div>
+      <div class="stat"><div class="n">AWS</div><div class="l">SysOps in Progress</div></div>
+    </div>
+  </section>
 
-        I have hands-on experience with VMware, Active Directory,
-        Sophos Firewall, VLANs, VPN, NAS Storage and AWS services like
-        EC2, IAM and S3.
-
-        I am currently preparing for AWS SysOps Administrator Associate
-        and building cloud projects.
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="sec-head"><span class="sec-tag">01</span><span class="sec-title">about</span></div>
+    <p class="about-text">
+      I'm a <strong>System &amp; Network Administrator</strong> with 5+ years managing production infrastructure
+      across Linux, Windows, and macOS. My day-to-day covers <strong>Sophos Firewall</strong> policy, VLANs and VPNs,
+      <strong>VMware</strong> virtualization, <strong>TrueNAS</strong> storage, and Active Directory — plus growing
+      hands-on work with <strong>AWS EC2, S3, and IAM</strong>. I'm currently preparing for the
+      <strong>AWS SysOps Administrator – Associate</strong> exam and moving my career toward cloud infrastructure,
+      applying the same on-call discipline I've built keeping 100+ endpoints healthy and available.
     </p>
+  </section>
 
-    <hr>
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="sec-head"><span class="sec-tag">02</span><span class="sec-title">systems status</span></div>
+    <div class="status-grid">
+      <div class="status-card">
+        <div class="status-head"><span class="status-dot"></span><span class="status-name">OS &amp; SERVERS</span></div>
+        <div class="status-tags">
+          <span class="tag">AlmaLinux</span><span class="tag">CentOS</span><span class="tag">Ubuntu</span>
+          <span class="tag">Windows Server</span><span class="tag">macOS</span><span class="tag">Active Directory</span>
+        </div>
+      </div>
+      <div class="status-card">
+        <div class="status-head"><span class="status-dot"></span><span class="status-name">NETWORKING</span></div>
+        <div class="status-tags">
+          <span class="tag">TCP/IP</span><span class="tag">DNS/DHCP</span><span class="tag">VLANs</span>
+          <span class="tag">VPN (IPSec/SSL)</span><span class="tag">LAN/WAN</span><span class="tag">Managed Switches</span>
+        </div>
+      </div>
+      <div class="status-card">
+        <div class="status-head"><span class="status-dot"></span><span class="status-name">SECURITY</span></div>
+        <div class="status-tags">
+          <span class="tag">Sophos Firewall</span><span class="tag">IPS</span><span class="tag">SSL VPN</span>
+          <span class="tag">ESET Endpoint</span><span class="tag">Patch Mgmt</span><span class="tag">Access Control</span>
+        </div>
+      </div>
+      <div class="status-card">
+        <div class="status-head"><span class="status-dot"></span><span class="status-name">VIRTUALIZATION</span></div>
+        <div class="status-tags">
+          <span class="tag">VMware</span><span class="tag">VirtualBox</span><span class="tag">Hyper-V</span>
+          <span class="tag">Docker</span><span class="tag">Kubernetes</span>
+        </div>
+      </div>
+      <div class="status-card">
+        <div class="status-head"><span class="status-dot"></span><span class="status-name">CLOUD (AWS)</span></div>
+        <div class="status-tags">
+          <span class="tag">EC2</span><span class="tag">S3</span><span class="tag">IAM</span>
+          <span class="tag">Direct Connect</span><span class="tag">CloudWatch</span>
+        </div>
+      </div>
+      <div class="status-card">
+        <div class="status-head"><span class="status-dot"></span><span class="status-name">STORAGE</span></div>
+        <div class="status-tags">
+          <span class="tag">TrueNAS</span><span class="tag">Synology</span><span class="tag">FTP Server</span>
+        </div>
+      </div>
+      <div class="status-card">
+        <div class="status-head"><span class="status-dot"></span><span class="status-name">WEB &amp; DB</span></div>
+        <div class="status-tags">
+          <span class="tag">Apache</span><span class="tag">Nginx</span><span class="tag">XAMPP</span>
+          <span class="tag">WAMP</span><span class="tag">MySQL</span><span class="tag">MongoDB</span>
+        </div>
+      </div>
+      <div class="status-card">
+        <div class="status-head"><span class="status-dot"></span><span class="status-name">SCRIPTING &amp; TOOLS</span></div>
+        <div class="status-tags">
+          <span class="tag">Bash</span><span class="tag">PowerShell</span><span class="tag">Nagios</span>
+          <span class="tag">Git</span><span class="tag">Raspberry Pi</span><span class="tag">Wake-on-LAN</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <h2>Technical Skills</h2>
+  <!-- CERTS -->
+  <section id="certs">
+    <div class="sec-head"><span class="sec-tag">03</span><span class="sec-title">certifications</span></div>
+    <div class="cert-row">
+      <div class="cert"><span class="cn">CompTIA A+</span><span class="cs done">complete</span></div>
+      <div class="cert"><span class="cn">CompTIA Network+</span><span class="cs done">complete</span></div>
+      <div class="cert"><span class="cn">CCNA</span><span class="cs progress">training</span></div>
+      <div class="cert"><span class="cn">AWS SysOps Administrator – Associate</span><span class="cs progress">in progress</span></div>
+    </div>
+  </section>
 
-    <ul>
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="sec-head"><span class="sec-tag">04</span><span class="sec-title">experience log</span></div>
+    <div class="log">
+      <div class="log-entry">
+        <div class="log-meta">[ 2021-04 — PRESENT ]</div>
+        <div class="log-role">System Administrator</div>
+        <div class="log-org">WeeTech Solution Pvt. Ltd. · Surat, Gujarat</div>
+        <ul class="log-list">
+          <li>Manage 100+ endpoints across Linux, Windows and macOS, keeping high availability</li>
+          <li>Administer LAN/WAN, DNS/DHCP and configure L2+ managed switches with VLANs and trunking across multiple ISPs</li>
+          <li>Implement Sophos Firewall policy — rules, IPS, web filtering, SSL VPN for secure remote access</li>
+          <li>Deploy and manage VMware/VirtualBox VMs: resourcing, snapshots, performance tuning</li>
+          <li>Run TrueNAS storage — setup, volumes, scheduled backups, recovery testing</li>
+          <li>Manage Active Directory users, groups and group policies</li>
+          <li>Automate patching, log rotation and health checks with Bash and PowerShell</li>
+        </ul>
+      </div>
+      <div class="log-entry">
+        <div class="log-meta">[ 2020-07 — 2020-12 ]</div>
+        <div class="log-role">System Administrator</div>
+        <div class="log-org">Brainwaves · Surat, Gujarat</div>
+        <ul class="log-list">
+          <li>Ensured system component compatibility across network infrastructure</li>
+          <li>Monitored network security and availability, managed firewall rules and device inventory</li>
+          <li>Handled OS installs, software deployment and hardware troubleshooting</li>
+        </ul>
+      </div>
+      <div class="log-entry">
+        <div class="log-meta">[ 2020-02 — 2020-05 ]</div>
+        <div class="log-role">Network Engineer Trainee</div>
+        <div class="log-org">Tops Technologies Pvt. Ltd. · Surat, Gujarat</div>
+        <ul class="log-list">
+          <li>Configured routers, Cisco switches, load balancers, firewalls and VPN appliances</li>
+          <li>Assisted with network maintenance, upgrades and security patching</li>
+          <li>Implemented firewall rules and access control under senior supervision</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-        <li>Windows Server</li>
-        <li>Linux</li>
-        <li>Active Directory</li>
-        <li>AWS EC2</li>
-        <li>AWS IAM</li>
-        <li>AWS S3</li>
-        <li>VMware</li>
-        <li>Docker</li>
-        <li>Kubernetes</li>
-        <li>Sophos Firewall</li>
-        <li>Networking</li>
-        <li>Git & GitHub</li>
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="sec-head"><span class="sec-tag">05</span><span class="sec-title">education</span></div>
+    <div class="edu-row">
+      <div class="edu">
+        <div><div class="en">Bachelor of Computer Applications (BCA)</div><div class="es">Parul University, Vadodara, Gujarat</div></div>
+        <div class="ey">JUNE 2019</div>
+      </div>
+      <div class="edu">
+        <div><div class="en">Higher Secondary Certificate (HSC)</div><div class="es">Shri Sardar Patel High School, Kadodara, Gujarat</div></div>
+        <div class="ey">MARCH 2016</div>
+      </div>
+    </div>
+  </section>
 
-    </ul>
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="sec-head"><span class="sec-tag">06</span><span class="sec-title">contact</span></div>
+    <div class="contact-grid">
+      <a class="contact-card" href="mailto:chandanpatel.tech@gmail.com">
+        <span class="cc-label">Email</span><span class="cc-value">chandanpatel.tech@gmail.com</span>
+      </a>
+      <a class="contact-card" href="tel:+919265364707">
+        <span class="cc-label">Phone</span><span class="cc-value">+91 92653 64707</span>
+      </a>
+      <a class="contact-card" href="https://linkedin.com/in/chandan-patel-252aa6135" target="_blank" rel="noopener">
+        <span class="cc-label">LinkedIn</span><span class="cc-value">/in/chandan-patel</span>
+      </a>
+      <a class="contact-card" href="https://github.com/chandanpateltech-sudo" target="_blank" rel="noopener">
+        <span class="cc-label">GitHub</span><span class="cc-value">@chandanpateltech-sudo</span>
+      </a>
+    </div>
+  </section>
 
-    <hr>
+</div>
 
-    <h2>Certifications</h2>
+<footer>
+  <p>Kadodara, Surat, Gujarat · Built &amp; maintained by Chandan U. Patel</p>
+</footer>
 
-    <ul>
+<script>
+  // Restrained hero typing sequence — one orchestrated moment, not scattered effects
+  (function(){
+    var el = document.getElementById('typed');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var text = "whoami --role";
+    var final = "System & Network Security Administrator, 5+ yrs — building toward AWS Cloud.";
 
-        <li>CompTIA A+</li>
-        <li>CompTIA Network+</li>
-        <li>CCNA Training</li>
-        <li>AWS SysOps Administrator Associate (In Progress)</li>
+    if(reduce){
+      el.textContent = final;
+      return;
+    }
 
-    </ul>
-
-    <hr>
-
-    <h2>Experience</h2>
-
-    <h3>System Administrator</h3>
-
-    <p>
-        WeeTech Solution Pvt. Ltd.
-    </p>
-
-    <ul>
-
-        <li>5+ Years Experience</li>
-        <li>100+ Endpoints Management</li>
-        <li>Windows, Linux & macOS Administration</li>
-        <li>VMware Virtualization</li>
-        <li>Sophos Firewall</li>
-        <li>NAS Storage</li>
-        <li>AWS Basics</li>
-
-    </ul>
-
-    <hr>
-
-    <h2>Contact</h2>
-
-    <p>Email : chandanpatel.tech@gmail.com</p>
-
-    <p>Location : Surat, Gujarat</p>
-
-    <p>LinkedIn : https://linkedin.com/in/chandan-patel-252aa6135</p>
-
-    <p>GitHub : https://github.com/chandanpateltech-sudo</p>
+    var i = 0;
+    function typeCmd(){
+      if(i <= text.length){
+        el.textContent = text.slice(0, i);
+        i++;
+        setTimeout(typeCmd, 55);
+      } else {
+        setTimeout(printOut, 350);
+      }
+    }
+    function printOut(){
+      var line = document.createElement('div');
+      line.className = 'line out';
+      el.parentElement.insertBefore(line, el.parentElement.lastElementChild.nextSibling);
+      var j = 0;
+      function typeOut(){
+        if(j <= final.length){
+          line.textContent = final.slice(0, j);
+          j++;
+          setTimeout(typeOut, 18);
+        }
+      }
+      typeOut();
+    }
+    typeCmd();
+  })();
+</script>
 
 </body>
 </html>
